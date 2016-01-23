@@ -24,8 +24,10 @@ class MySQLConnect
 		$this->_pass = $pass;
 		$this->_database = $database;
 
-		$this->db = mysql_connect($this->_host, $this->_user, $this->_pass) or die ('Cannot connect to the database because: ' . mysql_error());
+		$this->db = new mysqli($this->_host, $this->_user, $this->_pass) or die ('Cannot connect to the database because: ' . mysqli_error($this->db));
 		self::changeDatabase($this->_database);
+
+		return $this;
 	}
 
 	public function changeConnection($host, $user, $pass, $database)
@@ -37,17 +39,17 @@ class MySQLConnect
 		$this->_pass = $pass;
 		$this->_database = $database;
 
-		$this->db = mysql_connect($this->_host, $this->_user, $this->_pass) or die ('Cannot connect to the database because:: ' . mysql_error());
+		$this->db = new mysqli($this->_host, $this->_user, $this->_pass) or die ('Cannot connect to the database because:: ' . mysqli_error($this->db));
 		self::changeDatabase($this->_database);
 	}
 
 	public function changeDatabase($database)
 	{
-		mysql_select_db($database);
+		mysqli_select_db($this->db, $database);
 	}
 
 	public function close()
 	{
-		mysql_close($this->db);
+		mysqli_close($this->db);
 	}
 }
