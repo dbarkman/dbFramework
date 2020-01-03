@@ -35,7 +35,15 @@ if (count($argv) <= 1) {
             $response = $kraken->QueryPublic('Ticker', $requestParameters);
             break;
         case 'OHLC':
-            $requestParameters = getOHLC('XXBTZUSD');
+            $pair = 'XXBTZUSD';
+            $interval = 1;
+            $since = time() - 60;
+            if (isset($argv[2])) $pair = $argv[2];
+            if (isset($argv[3])) $interval = $argv[3];
+            if (isset($argv[4])) $since = $argv[4];
+            $requestParameters['pair'] = $pair;
+            $requestParameters['interval'] = $interval;
+            $requestParameters['since'] = $since;
             $response = $kraken->QueryPublic('OHLC', $requestParameters);
             break;
         case 'Balance':
