@@ -8,9 +8,29 @@
 
 class Dropdowns
 {
+    public $getParameters = array(
+        'noun',
+        'key',
+        'recent',
+        'timePeriod',
+        'location',
+        'interval',
+        'startDate',
+        'endDate',
+        'latitude',
+        'longitude',
+        'radius',
+        'units',
+        'type',
+        'count',
+        'magnitude',
+        'intensity'
+    );
+
 	public $apiKeys = array(
-		'42m24fbJtEnAC6vXoVy8Yjz9U79dhZ3u',
-		'd9yBcTVkA44tNauP7C68eD62fbEZz73L'
+		'm3sX9kYiKm8aVBJwvykRp2go4T8vmiFesJVJyH3mbvJtP9RPRC3qywg3DPrqenwL', //test
+        'hj4TuBRgUqohwkhFx39nAzNZFF4Qmdnkg3uZL9EhFCxFRGhrw9oXxJ63Vpbnuu2H'  //iOS
+
 	);
 
 	public $responseType = array(

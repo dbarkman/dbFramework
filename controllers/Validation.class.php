@@ -148,14 +148,21 @@ class Validation
 		return implode("", preg_grep($pattern, str_split($input)));
 	}
 
-	protected function checkAPIKey($apiKey)
-	{
-		if (!in_array($apiKey, $this->_dd->apiKeys)) {
-			return 'nonAPIKey';
-		}
-	}
+    protected function checkAPIKey($apiKey)
+    {
+        if (!in_array($apiKey, $this->_dd->apiKeys)) {
+            return 'nonAPIKey';
+        }
+    }
 
-	protected function checkResponseType($responseType)
+    protected function checkParameters($parameter)
+    {
+        if (!in_array($parameter, $this->_dd->getParameters)) {
+            return 'nonParameter';
+        }
+    }
+
+    protected function checkResponseType($responseType)
 	{
 		if (!in_array($responseType, $this->_dd->responseType)) {
 			return 'nonResponseType';
@@ -232,15 +239,23 @@ class Validation
 		}
 	}
 
-	protected function checkAlphanumsWithSpace($input)
-	{
-		$pattern = '/[^A-Za-z0-9 ]/';
-		if (preg_match($pattern, $input)) {
-			return 'nonAlphanum';
-		}
-	}
+    protected function checkAlphanumsWithSpace($input)
+    {
+        $pattern = '/[^A-Za-z0-9 ]/';
+        if (preg_match($pattern, $input)) {
+            return 'nonAlphanum';
+        }
+    }
 
-	protected function checkAlphanumsWithSpaceAndPunctuation($input)
+    protected function checkAlphanumsWithSpaceDotDash($input)
+    {
+        $pattern = '/[^A-Za-z0-9 .%-]/';
+        if (preg_match($pattern, $input)) {
+            return 'nonAlphanum';
+        }
+    }
+
+    protected function checkAlphanumsWithSpaceAndPunctuation($input)
 	{
 		$pattern = "/[^A-Za-z0-9.',- ]/";
 		if (preg_match($pattern, $input)) {
@@ -370,7 +385,8 @@ class Validation
 
 	protected function checkIllegal($input)
 	{
-		$pattern = '/[!#$%^*()=+~_`\[\]{}|;:"<>?\/-]/';
+//        $pattern = '/[!#$%^*()=+~_`\[\]{}|;:"<>?\/-]/';
+        $pattern = '/[!#$^*()=+~_`\[\]{}|;:"<>?\/]/';
 		//not working(~, _, `)
 		if (preg_match($pattern, $input)) {
 			return 'nonLegal';

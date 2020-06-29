@@ -94,27 +94,63 @@ class FrameworkValidation extends Validation
 		return parent::sanitizeTextWithSpace($input);
 	}
 
-	public function validateAPIKey($input)
-	{
-		$error = '';
+    public function validateAPIKey($input)
+    {
+        $error = '';
 
-		if (parent::checkBlank($input) != null) {
-			$error = 'Blank';
-		} else {
-			if (parent::checkLength($input, 32) != null) {
-				$error = 'Short';
-			} else {
-				if (parent::checkIllegal($input) != null) {
-					$error = 'Illegal';
-				} else {
-					if (parent::checkAPIKey($input) != null) {
-						$error = 'Invalid';
-					}
-				}
-			}
-		}
-		return $error;
-	}
+        if (parent::checkBlank($input) != null) {
+            $error = 'Blank';
+        } else {
+            if (parent::checkLength($input, 64) != null) {
+                $error = 'Short';
+            } else {
+                if (parent::checkIllegal($input) != null) {
+                    $error = 'Illegal';
+                } else {
+                    if (parent::checkAPIKey($input) != null) {
+                        $error = 'Invalid';
+                    }
+                }
+            }
+        }
+        return $error;
+    }
+
+    public function validateParameterKeys($input)
+    {
+        $error = '';
+
+        if (parent::checkIllegal($input) != null) {
+            $error = 'Illegal';
+        } else {
+            if (parent::checkAlphanums($input) != null) {
+                $error = 'Invalid';
+            } else {
+                if (parent::checkParameters($input) != null) {
+                    $error = 'Invalid';
+                }
+            }
+        }
+        return $error;
+    }
+
+    public function validateParameterValues($input)
+    {
+        $error = '';
+
+        if (parent::checkBlank($input) != null) {
+            $error = 'Blank';
+        } else {
+            if (parent::checkIllegal($input) != null) {
+                $error = 'Illegal';
+            } else {
+                if (parent::checkAlphanumsWithSpaceDotDash($input) != null) {
+                    $error = 'Invalid';
+                }
+            }
+        }
+        return $error;
+    }
 
 	public function validateName($input)
 	{
