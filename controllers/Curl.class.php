@@ -18,10 +18,10 @@ class Curl
 
 	protected function runCurl($requestMethod, $url, $headers = null, $userpwd = null, $fields = null, $returnStatus = false)
 	{
-//        ob_start();
-//        $out = fopen('/var/www/html/dbFramework/logs/curl.log', 'a');
-//        fwrite($out, '-------------------- STARTING --------------------' . PHP_EOL);
-//        fwrite($out, $url . PHP_EOL);
+        ob_start();
+        $out = fopen('/var/www/html/dbFramework/logs/curl.log', 'a');
+        fwrite($out, '-------------------- STARTING --------------------' . PHP_EOL);
+        fwrite($out, $url . PHP_EOL);
         $ch = curl_init();
 		if ($requestMethod === 'GET') curl_setopt($ch, CURLOPT_HTTPGET, 1);
 		if ($requestMethod === 'POST') {
@@ -44,14 +44,14 @@ class Curl
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
 		curl_setopt($ch, CURLOPT_VERBOSE, 0);
-//		curl_setopt($ch, CURLOPT_STDERR, $out);
+		curl_setopt($ch, CURLOPT_STDERR, $out);
 		$output = curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $response = array('status' => $status, 'output' => $output);
 
-//        fwrite($out, '-------------------- ENDING --------------------' . PHP_EOL . PHP_EOL);
-//        fclose($out);
-//        $this->debug = ob_get_clean();
+        fwrite($out, '-------------------- ENDING --------------------' . PHP_EOL . PHP_EOL);
+        fclose($out);
+        $this->debug = ob_get_clean();
 
 		curl_close($ch);
 
