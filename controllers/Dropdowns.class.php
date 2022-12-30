@@ -29,8 +29,10 @@ class Dropdowns
 
 	public $apiKeys = array(
 		'm3sX9kYiKm8aVBJwvykRp2go4T8vmiFesJVJyH3mbvJtP9RPRC3qywg3DPrqenwL', //test
-        'hj4TuBRgUqohwkhFx39nAzNZFF4Qmdnkg3uZL9EhFCxFRGhrw9oXxJ63Vpbnuu2H'  //iOS
-
+        'hj4TuBRgUqohwkhFx39nAzNZFF4Qmdnkg3uZL9EhFCxFRGhrw9oXxJ63Vpbnuu2H', //iOS
+        'uz6v9gtWcup33HvFUqTYy7drDn7g9zFT7dT94jCQhkdKdJZCxdb6UGJbgrTNckqB', //RapidAPI
+        'Esz4JhsfVeGe6dQJ2sWUrCG7XUint4iwfXuy2ywdqWj4t9Z2NeGEErvP9ZFqxosJ', //TextIt
+        'CaVEmEwQYq2i4qv4RCqEQPT48WiujDBdJ6VfNDTZTuQjFX2NqCauEow8QRhiroxX' //SwiftUI
 	);
 
 	public $responseType = array(

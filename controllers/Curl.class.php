@@ -41,6 +41,7 @@ class Curl
 		}
 		if ($requestMethod === 'DELETE') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
 
+        curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_2_0);
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
@@ -50,13 +51,19 @@ class Curl
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $response = array('status' => $status, 'output' => $output);
 
+        if ($status == 429) {
+            $sendMail = new SendEmail($this->_logger);
+            $sendMail->send('api429@dbarkman.com', 'david.barkman13@gmail.com', '429-1 from API', 'Status: ' . $status . ', Method: ' . $requestMethod . PHP_EOL . 'URL: ' . $url);
+            fwrite($out, 'API responded with ' . $status . ', ' . $requestMethod . ', ' . $url . PHP_EOL);
+        }
+
         fwrite($out, '-------------------- ENDING --------------------' . PHP_EOL . PHP_EOL);
         fclose($out);
         $this->debug = ob_get_clean();
 
 		curl_close($ch);
 
-		if ($returnStatus == true) {
+        if ($returnStatus == true) {
 		    return $response;
         } else {
             return $output;
