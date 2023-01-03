@@ -11,13 +11,11 @@ class Curl
 	private $_logger;
 //	public $debug;
 
-	public function __construct($logger)
-	{
+	public function __construct($logger) {
 		$this->_logger = $logger;
 	}
 
-	protected function runCurl($requestMethod, $url, $headers = null, $userpwd = null, $fields = null, $returnStatus = false)
-	{
+	protected function runCurl($requestMethod, $url, $headers = null, $userpwd = null, $fields = null, $returnStatus = false) {
         ob_start();
         $out = fopen('/var/www/html/dbFramework/logs/curl.log', 'a');
         fwrite($out, '-------------------- STARTING --------------------' . PHP_EOL);
@@ -45,7 +43,7 @@ class Curl
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
-		curl_setopt($ch, CURLOPT_VERBOSE, 0);
+		curl_setopt($ch, CURLOPT_VERBOSE, 1);
 		curl_setopt($ch, CURLOPT_STDERR, $out);
 		$output = curl_exec($ch);
         $status = curl_getinfo($ch, CURLINFO_HTTP_CODE);

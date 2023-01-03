@@ -17,13 +17,19 @@ class BigDataCloud extends Curl
 		$this->_logger = $logger;
 	}
 
-	public function reverseGeocode($url)
-	{
-		$this->_logger->info('BigDataCloud URL: ' . $url);
-
-        $curlResult = self::runCurl('GET', $url, null, null, null);
-        $this->_logger->debug('BigDataCloud Curl Result-: ' . $curlResult);
-
-        return json_decode($curlResult);
-	}
+	public function reverseGeocode($url) {
+		$this->_logger->debug('BigDataCloud URL: ' . $url);
+        $response = self::runCurl('GET', $url, null, null, null, true);
+        if ($response['status'] == 200) {
+            $this->_logger->debug("BigDataCloud API returned: " . $response['status']);
+        } else {
+            $this->_logger->warn("BigDataCloud API returned: " . $response['status']);
+        }
+        if ($response['status'] == 429) {
+            $this->_logger->error("BigDataCloud API returned 429, BACK OFF!");
+            return FALSE;
+        } else {
+            return json_decode($response['output']);
+        }
+    }
 }
