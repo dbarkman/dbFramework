@@ -15,8 +15,7 @@ class SendEmail extends Curl
     private $_apiKey;
     private $_secretKey;
 
-    public function __construct($logger)
-    {
+    public function __construct($logger) {
         $this->_logger = $logger;
 
         global $maijetCreds;
@@ -24,8 +23,7 @@ class SendEmail extends Curl
         $this->_secretKey = $maijetCreds['apiSecret'];
     }
 
-	public function send($fromAddress, $toAddress, $subject, $message)
-	{
+	public function send($fromAddress, $toAddress, $subject, $message) {
         $body = [
             'Messages' => [
                 [
