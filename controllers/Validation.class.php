@@ -257,7 +257,7 @@ class Validation
 
     protected function checkAlphanumsWithSpaceAndPunctuation($input)
 	{
-		$pattern = "/[^A-Za-z0-9.',- ]/";
+		$pattern = "/[^A-Za-z0-9.',\- ]/";
 		if (preg_match($pattern, $input)) {
 			return 'nonAlphanum';
 		}

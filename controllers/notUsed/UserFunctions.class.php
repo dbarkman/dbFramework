@@ -55,8 +55,8 @@ class MySQLTools {
     public function __construct()
     {
 		global $logRequest;
-		$this->db = mysql_connect($logRequest['sqlHost'], $logRequest['sqlUser'], $logRequest['sqlPassword']) or die ('I cannot connect to the database because: ' . mysql_error());
-		mysql_select_db ($logRequest['sqlDatabase']);
+		$this->db = mysqli_connect($logRequest['sqlHost'], $logRequest['sqlUser'], $logRequest['sqlPassword']) or die ('I cannot connect to the database because: ' . mysqli_error());
+		mysqli_select_db ($logRequest['sqlDatabase']);
 	}
 
     //methods
@@ -89,8 +89,8 @@ class MySQLTools {
     private function getSalt($username)
     {
         $query = "SELECT salt FROM salt WHERE id = '$username'";
-        $result = @mysql_query($query);
-        $row = mysql_fetch_array($result, MYSQL_ASSOC);
+        $result = @mysqli_query($query);
+        $row = mysqli_fetch_array($result, mysqli_ASSOC);
         return $row['salt'];
     }
 
@@ -103,12 +103,12 @@ class MySQLTools {
     {
         $salt = $this->createSalt();
 		$query = "INSERT INTO salt (id, salt) VALUES ('$this->_username', '$salt')";
-		$result = @mysql_query($query); // Run the query.
+		$result = @mysqli_query($query); // Run the query.
 		unset($query, $result);
 
         $encrypted = strtoupper(hash('sha512', $salt.$this->_password));
         $query = "INSERT INTO users (username, password) VALUES ('$this->_username', '$encrypted')";
-        $result = @mysql_query($query); // Run the query.
+        $result = @mysqli_query($query); // Run the query.
     }
 
 	/**
@@ -138,8 +138,8 @@ class MySQLTools {
         $salt = $this->getSalt($this->_username);
         $encrypted = strtoupper(hash('sha512', $salt.$this->_password));
         $query = "SELECT * FROM users WHERE username = '$this->_username' AND password = '$encrypted'";
-        $result = @mysql_query($query); // Run the query.
-        $row = mysql_fetch_array($result, MYSQL_ASSOC); // Return a record, if applicable.
+        $result = @mysqli_query($query); // Run the query.
+        $row = mysqli_fetch_array($result, mysqli_ASSOC); // Return a record, if applicable.
 
         if ($row['username'] == $this->_username && $row['password'] == $encrypted) { // A record was pulled from the database.
             if ($this->lastLogin($this->_username) == null && $this->uniqueRand($this->_username) == null) {
@@ -173,9 +173,9 @@ class MySQLTools {
     {
         $now = time();
         $query = "UPDATE users SET lastlogin = '$now' WHERE username = '$username'";
-        $result = @mysql_query($query); // Run the query.
+        $result = @mysqli_query($query); // Run the query.
 
-        if (mysql_affected_rows() != 1) { // A record was pulled from the database.
+        if (mysqli_affected_rows() != 1) { // A record was pulled from the database.
             return 'error';
         }
     }
@@ -189,9 +189,9 @@ class MySQLTools {
     {
         $uniqrand = md5(uniqid(mt_rand(),true));
         $query = "UPDATE users SET uniqrand = '$uniqrand' WHERE username = '$username'";
-        $result = @mysql_query($query); // Run the query.
+        $result = @mysqli_query($query); // Run the query.
 
-        if (mysql_affected_rows() != 1) { // A record was pulled from the database.
+        if (mysqli_affected_rows() != 1) { // A record was pulled from the database.
             return 'error';
         } else {
             $this->_uniqrand = $uniqrand;
@@ -206,8 +206,8 @@ class MySQLTools {
     public function getUniqRand($username)
     {
         $query = "SELECT uniqrand FROM users WHERE username = '$username'";
-        $result = @mysql_query($query);
-        $row = mysql_fetch_array($result, MYSQL_ASSOC);
+        $result = @mysqli_query($query);
+        $row = mysqli_fetch_array($result, mysqli_ASSOC);
         return $row['uniqrand'];
     }
 

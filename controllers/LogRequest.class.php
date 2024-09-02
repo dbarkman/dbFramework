@@ -54,6 +54,6 @@ class LogRequest
 				osVersion = '$osVersion',
 				ip = '$ip'
 		";
-		mysql_query($query, $db);
+		mysqli_query($db, $query);
 	}
 }

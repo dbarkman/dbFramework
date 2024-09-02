@@ -94,14 +94,14 @@ class FrameworkValidation extends Validation
 		return parent::sanitizeTextWithSpace($input);
 	}
 
-    public function validateAPIKey($input)
+    public function validateAPIKey($input, $length = 64)
     {
         $error = '';
 
         if (parent::checkBlank($input) != null) {
             $error = 'Blank';
         } else {
-            if (parent::checkLength($input, 64) != null) {
+            if (parent::checkLength($input, $length) != null) {
                 $error = 'Short';
             } else {
                 if (parent::checkIllegal($input) != null) {

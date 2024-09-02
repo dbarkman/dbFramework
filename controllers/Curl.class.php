@@ -9,7 +9,6 @@
 class Curl
 {
 	private $_logger;
-//	public $debug;
 
 	public function __construct($logger) {
 		$this->_logger = $logger;
@@ -30,6 +29,9 @@ class Curl
         if ($requestMethod === 'PATCH') curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PATCH');
         if (!empty($headers)) {
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        }
+        if (!empty($fields)) {
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
         }
 		if ($requestMethod === 'PUT') curl_setopt($ch, CURLOPT_PUT, 1);
 		if ($requestMethod === 'PUTJson') {
@@ -57,7 +59,6 @@ class Curl
 
         fwrite($out, '-------------------- ENDING --------------------' . PHP_EOL . PHP_EOL);
         fclose($out);
-        $this->debug = ob_get_clean();
 
 		curl_close($ch);
 

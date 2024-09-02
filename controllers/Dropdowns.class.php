@@ -32,7 +32,11 @@ class Dropdowns
         'hj4TuBRgUqohwkhFx39nAzNZFF4Qmdnkg3uZL9EhFCxFRGhrw9oXxJ63Vpbnuu2H', //iOS
         'uz6v9gtWcup33HvFUqTYy7drDn7g9zFT7dT94jCQhkdKdJZCxdb6UGJbgrTNckqB', //RapidAPI
         'Esz4JhsfVeGe6dQJ2sWUrCG7XUint4iwfXuy2ywdqWj4t9Z2NeGEErvP9ZFqxosJ', //TextIt
-        'CaVEmEwQYq2i4qv4RCqEQPT48WiujDBdJ6VfNDTZTuQjFX2NqCauEow8QRhiroxX' //SwiftUI
+        'CaVEmEwQYq2i4qv4RCqEQPT48WiujDBdJ6VfNDTZTuQjFX2NqCauEow8QRhiroxX', //SwiftUI
+        's7owdPTyiPG9LLq3quuqtJRxmXH7FbucqBVn7MTqTMxVmNrznujeKVTTaZqfN8gAoLimDxkjxCtRGYkqHrv9dAqqr8EJg4QMazxq', //AlpacaManagerAPI
+        'vW2woGBYAozivB6XZhciFzjfm3HuLU478n3R2Y33ugJfx4GyXeFyryHh9fF8KHCcWfLsqr9J7DLXYey644ovrhcE6qHCHDeMxRYX', //QuantifyMeAPI
+        'WWAoudZL9QCQwKHXN9WU6ear69WNe8XVs8JbQsGJfFUTvPJZq9wGyrbYwG3LNp8u4i2zbDMD9Ph3XhQjuPCoBm2MN74dcP8W2DRA', //KiwixAPI
+        'MQ93gJTVQAudzM8QxL2Tru6No27mu6DE9iyRoktjQjBjqRkyi66vHifQLU7FPeBvBR8PBQkdrv8sM4Evi4EQNA6AeBAkfv9434RQ' //lpAPI
 	);
 
 	public $responseType = array(

@@ -53,7 +53,7 @@ class SendEmail extends Curl
         $response = self::runCurl('POST', $url, $headers, $user, $fields, true);
         $this->_status = $response['status'];
         $this->_response = json_decode($response['output']);
-        $this->_logger->info("Mailjet API returned: " . $this->_status);
+        $this->_logger->debug("Mailjet API returned: " . $this->_status);
         return $this->_status;
 	}
 
