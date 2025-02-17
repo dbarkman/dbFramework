@@ -10,7 +10,7 @@
  
 class Tools
 {
-    public static function convertDurationSecondsToTime($duration) {
+    public static function convertDurationSecondsToTime($duration): string {
         $days = 0;
         $hours = 0;
         $minutes = 0;
@@ -51,5 +51,26 @@ class Tools
         $time .= ($minutes > 0) ? ($minutes < 10) ? "0" . $minutes . ":" : $minutes . ":" : "00:";
         $time .= ($seconds > 0) ? ($seconds < 10) ? "0" . $seconds : $seconds : "00";
         return $time;
+    }
+
+    public static function convertTimeToDurationSeconds($time): string {
+        $timeParts = explode(':', $time);
+        $seconds = $timeParts[0] * 3600;
+        $seconds += $timeParts[1] * 60;
+        $seconds += intval($timeParts[2]);
+        return $seconds;
+    }
+
+    public static function shortenAddys($address, $parts): string {
+        $first4 = substr($address, 0, 4);
+        $last4 = substr($address, -4);
+        switch ($parts) {
+            case 1:
+                return $first4;
+            case 2:
+                return $last4;
+            default:
+                return $first4 . '...' . $last4;
+        }
     }
 }

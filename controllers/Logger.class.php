@@ -72,7 +72,7 @@ class Logger
 				$file = explode('/', $trace[1]['file']);
 				$file = array_pop($file);
 				$now = date("m/d/Y H:i:s", time());
-				$msg = sprintf("%-14s | %-5s - %s", $now, self::$levels[$level], session_id() . " - (" . $file . ") - " . $message);
+				$msg = sprintf("%-14s | %-5s - %s", $now, self::$levels[$level], substr(session_id(), 0, 4) . " - (" . $file . ") - " . $message);
 				file_put_contents($log, "$msg\n", FILE_APPEND);
 			}
 		} catch (Exception $e) {
