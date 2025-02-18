@@ -59,7 +59,7 @@ jobs:
                      --exclude 'tests' \
                      --exclude 'phpunit.xml' \
                      --exclude 'README.md' \
-                     ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/docker/lamp/staging/www/
+                     ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/docker/lamp/staging/dbFramework/
 
       - name: Update Staging Environment
         run: |
@@ -88,7 +88,7 @@ jobs:
                      --exclude 'tests' \
                      --exclude 'phpunit.xml' \
                      --exclude 'README.md' \
-                     ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/docker/lamp/production/www/
+                     ./ ${{ secrets.DEPLOY_USER }}@${{ secrets.DEPLOY_HOST }}:/opt/docker/lamp/production/dbFramework/
 
       - name: Update Production Environment
         run: |
